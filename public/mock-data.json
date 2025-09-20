@@ -1,0 +1,211 @@
+[
+  {"date": "2025-09-18", "symbol": "TSLA", "action": "sell", "shares": 0.4852, "amount_usd": 125.89},
+  {"date": "2025-09-18", "symbol": "IWM", "action": "buy", "shares": 0.4505, "amount_usd": -111.49},
+  {"date": "2025-09-18", "symbol": "IBM", "action": "sell", "shares": 0.3901, "amount_usd": 101.33},
+  {"date": "2025-09-18", "symbol": "BX", "action": "buy", "shares": 0.5301, "amount_usd": -101.48},
+  {"date": "2025-09-18", "symbol": "PYPG", "action": "sell", "shares": 6.015, "amount_usd": 99.43},
+  
+  {"date": "2025-09-17", "symbol": "NVDA", "action": "buy", "shares": 0.2855, "amount_usd": -89.99},
+  {"date": "2025-09-17", "symbol": "PYPG", "action": "buy", "shares": 6.015, "amount_usd": -101.50},
+  {"date": "2025-09-17", "symbol": "AAPL", "action": "sell", "shares": 0.6234, "amount_usd": 142.87},
+  {"date": "2025-09-17", "symbol": "MSFT", "action": "buy", "shares": 0.2891, "amount_usd": -119.99},
+  
+  {"date": "2025-09-16", "symbol": "PYPG", "action": "sell", "shares": 6.015, "amount_usd": 99.43},
+  {"date": "2025-09-16", "symbol": "MRAL", "action": "buy", "shares": 7.0687, "amount_usd": -151.50},
+  {"date": "2025-09-16", "symbol": "AMZN", "action": "buy", "shares": 0.3377, "amount_usd": -151.50},
+  {"date": "2025-09-16", "symbol": "GOOG", "action": "sell", "shares": 0.1845, "amount_usd": 89.45},
+  {"date": "2025-09-16", "symbol": "TSLA", "action": "buy", "shares": 0.4852, "amount_usd": -120.00},
+  
+  {"date": "2025-09-15", "symbol": "RKLB", "action": "sell", "shares": 8.346, "amount_usd": 153.32},
+  {"date": "2025-09-15", "symbol": "RKLB", "action": "buy", "shares": 8.346, "amount_usd": -149.99},
+  {"date": "2025-09-15", "symbol": "GOOG", "action": "dividend", "shares": null, "amount_usd": 0.22},
+  {"date": "2025-09-15", "symbol": "IONL", "action": "sell", "shares": 1.7286, "amount_usd": 114.45},
+  {"date": "2025-09-15", "symbol": "AAPL", "action": "buy", "shares": 0.6234, "amount_usd": -135.00},
+  
+  {"date": "2025-09-14", "symbol": "META", "action": "sell", "shares": 0.1889, "amount_usd": 108.77},
+  {"date": "2025-09-14", "symbol": "SPY", "action": "buy", "shares": 0.2156, "amount_usd": -125.99},
+  {"date": "2025-09-14", "symbol": "QQQ", "action": "sell", "shares": 0.2785, "amount_usd": 134.82},
+  
+  {"date": "2025-09-13", "symbol": "PLTR", "action": "buy", "shares": 3.2547, "amount_usd": -119.99},
+  {"date": "2025-09-13", "symbol": "QQQ", "action": "buy", "shares": 0.2785, "amount_usd": -129.99},
+  {"date": "2025-09-13", "symbol": "TSLA", "action": "sell", "shares": 0.3987, "amount_usd": 98.76},
+  {"date": "2025-09-13", "symbol": "AMD", "action": "buy", "shares": 0.7123, "amount_usd": -99.99},
+  
+  {"date": "2025-09-12", "symbol": "QBTS", "action": "sell", "shares": 6.8966, "amount_usd": 119.89},
+  {"date": "2025-09-12", "symbol": "ARM", "action": "sell", "shares": 0.6885, "amount_usd": 103.94},
+  {"date": "2025-09-12", "symbol": "IONL", "action": "buy", "shares": 1.7286, "amount_usd": -99.99},
+  {"date": "2025-09-12", "symbol": "NFLX", "action": "buy", "shares": 0.1678, "amount_usd": -109.99},
+  
+  {"date": "2025-09-11", "symbol": "MSFT", "action": "dividend", "shares": null, "amount_usd": 0.19},
+  {"date": "2025-09-11", "symbol": "TSLA", "action": "buy", "shares": 0.3987, "amount_usd": -95.00},
+  {"date": "2025-09-11", "symbol": "META", "action": "buy", "shares": 0.1889, "amount_usd": -104.99},
+  {"date": "2025-09-11", "symbol": "COIN", "action": "sell", "shares": 0.8945, "amount_usd": 147.33},
+  
+  {"date": "2025-09-10", "symbol": "ARM", "action": "buy", "shares": 0.6885, "amount_usd": -99.99},
+  {"date": "2025-09-10", "symbol": "COIN", "action": "buy", "shares": 0.8945, "amount_usd": -140.00},
+  {"date": "2025-09-10", "symbol": "ROKU", "action": "sell", "shares": 2.1547, "amount_usd": 132.45},
+  {"date": "2025-09-10", "symbol": "GOOG", "action": "buy", "shares": 0.1845, "amount_usd": -85.00},
+  
+  {"date": "2025-09-09", "symbol": "CWD", "action": "sell", "shares": 2, "amount_usd": 74.16},
+  {"date": "2025-09-09", "symbol": "CWD", "action": "buy", "shares": 2, "amount_usd": -90.00},
+  {"date": "2025-09-09", "symbol": null, "action": "deposit", "shares": null, "amount_usd": 200.00},
+  {"date": "2025-09-09", "symbol": "IBM", "action": "buy", "shares": 0.3901, "amount_usd": -99.99},
+  {"date": "2025-09-09", "symbol": "ROKU", "action": "buy", "shares": 2.1547, "amount_usd": -125.00},
+  
+  {"date": "2025-09-08", "symbol": "PLTR", "action": "sell", "shares": 2.8945, "amount_usd": 108.76},
+  {"date": "2025-09-08", "symbol": "SOFI", "action": "buy", "shares": 14.5678, "amount_usd": -119.99},
+  {"date": "2025-09-08", "symbol": "RBLX", "action": "sell", "shares": 2.6547, "amount_usd": 125.89},
+  
+  {"date": "2025-09-07", "symbol": "RBLX", "action": "buy", "shares": 2.6547, "amount_usd": -119.99},
+  {"date": "2025-09-07", "symbol": "PLTR", "action": "buy", "shares": 2.8945, "amount_usd": -105.00},
+  {"date": "2025-09-07", "symbol": "UBER", "action": "sell", "shares": 1.8956, "amount_usd": 134.78},
+  
+  {"date": "2025-09-06", "symbol": "UBER", "action": "buy", "shares": 1.8956, "amount_usd": -129.99},
+  {"date": "2025-09-06", "symbol": "SNOW", "action": "sell", "shares": 0.8976, "amount_usd": 98.45},
+  {"date": "2025-09-06", "symbol": "DKNG", "action": "buy", "shares": 3.4578, "amount_usd": -109.99},
+  
+  {"date": "2025-09-05", "symbol": "NVDA", "action": "buy", "shares": 0.3311, "amount_usd": -54.99},
+  {"date": "2025-09-05", "symbol": "SNOW", "action": "buy", "shares": 0.8976, "amount_usd": -95.00},
+  {"date": "2025-09-05", "symbol": "CRWD", "action": "sell", "shares": 0.4567, "amount_usd": 118.92},
+  
+  {"date": "2025-09-04", "symbol": "CRWD", "action": "buy", "shares": 0.4567, "amount_usd": -115.00},
+  {"date": "2025-09-04", "symbol": "NET", "action": "sell", "shares": 1.7834, "amount_usd": 147.56},
+  {"date": "2025-09-04", "symbol": "TWLO", "action": "buy", "shares": 2.1098, "amount_usd": -129.99},
+  
+  {"date": "2025-09-03", "symbol": "NET", "action": "buy", "shares": 1.7834, "amount_usd": -142.50},
+  {"date": "2025-09-03", "symbol": "SHOP", "action": "sell", "shares": 1.6789, "amount_usd": 125.34},
+  {"date": "2025-09-03", "symbol": "PYPL", "action": "buy", "shares": 2.0987, "amount_usd": -139.99},
+  
+  {"date": "2025-09-02", "symbol": null, "action": "tax_august", "shares": null, "amount_usd": -15.43},
+  {"date": "2025-09-02", "symbol": "SHOP", "action": "buy", "shares": 1.6789, "amount_usd": -119.99},
+  {"date": "2025-09-02", "symbol": "SQ", "action": "sell", "shares": 2.3456, "amount_usd": 168.90},
+  
+  {"date": "2025-09-01", "symbol": "SQ", "action": "buy", "shares": 2.3456, "amount_usd": -159.99},
+  {"date": "2025-09-01", "symbol": "SPOT", "action": "buy", "shares": 0.3456, "amount_usd": -109.99},
+  {"date": "2025-09-01", "symbol": null, "action": "deposit", "shares": null, "amount_usd": 500.00},
+
+  {"date": "2025-08-31", "symbol": "SPOT", "action": "sell", "shares": 0.3267, "amount_usd": 105.87},
+  {"date": "2025-08-31", "symbol": "BABA", "action": "buy", "shares": 1.2345, "amount_usd": -119.99},
+  {"date": "2025-08-31", "symbol": "JD", "action": "sell", "shares": 3.4567, "amount_usd": 98.76},
+  
+  {"date": "2025-08-30", "symbol": "JD", "action": "buy", "shares": 3.4567, "amount_usd": -95.00},
+  {"date": "2025-08-30", "symbol": "SPOT", "action": "buy", "shares": 0.3267, "amount_usd": -99.99},
+  {"date": "2025-08-30", "symbol": "NIO", "action": "sell", "shares": 25.6789, "amount_usd": 124.56},
+  
+  {"date": "2025-08-29", "symbol": "NIO", "action": "buy", "shares": 25.6789, "amount_usd": -119.99},
+  {"date": "2025-08-29", "symbol": "XPEV", "action": "sell", "shares": 8.9012, "amount_usd": 87.45},
+  {"date": "2025-08-29", "symbol": "LI", "action": "buy", "shares": 4.5678, "amount_usd": -109.99},
+  
+  {"date": "2025-08-28", "symbol": "XPEV", "action": "buy", "shares": 8.9012, "amount_usd": -84.99},
+  {"date": "2025-08-28", "symbol": "PDD", "action": "sell", "shares": 0.9876, "amount_usd": 134.78},
+  {"date": "2025-08-28", "symbol": "TMUS", "action": "buy", "shares": 0.6789, "amount_usd": -129.99},
+  
+  {"date": "2025-08-27", "symbol": "PDD", "action": "buy", "shares": 0.9876, "amount_usd": -129.99},
+  {"date": "2025-08-27", "symbol": "VRTX", "action": "sell", "shares": 0.2345, "amount_usd": 108.92},
+  {"date": "2025-08-27", "symbol": "MRNA", "action": "buy", "shares": 1.4567, "amount_usd": -119.99},
+  
+  {"date": "2025-08-26", "symbol": "VRTX", "action": "buy", "shares": 0.2345, "amount_usd": -105.00},
+  {"date": "2025-08-26", "symbol": "BNTX", "action": "sell", "shares": 1.2098, "amount_usd": 96.78},
+  {"date": "2025-08-26", "symbol": "ABBV", "action": "buy", "shares": 0.7654, "amount_usd": -139.99},
+  
+  {"date": "2025-08-25", "symbol": "OSRH", "action": "buy", "shares": 9.2155, "amount_usd": -10.00},
+  {"date": "2025-08-25", "symbol": "BNTX", "action": "buy", "shares": 1.2098, "amount_usd": -92.50},
+  {"date": "2025-08-25", "symbol": "PFE", "action": "sell", "shares": 3.8765, "amount_usd": 108.45},
+  
+  {"date": "2025-08-24", "symbol": "PFE", "action": "buy", "shares": 3.8765, "amount_usd": -105.00},
+  {"date": "2025-08-24", "symbol": "JNJ", "action": "sell", "shares": 0.6543, "amount_usd": 112.34},
+  {"date": "2025-08-24", "symbol": "WMT", "action": "buy", "shares": 1.7890, "amount_usd": -129.99},
+  
+  {"date": "2025-08-23", "symbol": "JNJ", "action": "buy", "shares": 0.6543, "amount_usd": -109.99},
+  {"date": "2025-08-23", "symbol": "KO", "action": "sell", "shares": 1.9876, "amount_usd": 127.88},
+  {"date": "2025-08-23", "symbol": "PG", "action": "buy", "shares": 0.8765, "amount_usd": -149.99},
+  
+  {"date": "2025-08-22", "symbol": "OSRH", "action": "sell", "shares": 9.2155, "amount_usd": 9.22},
+  {"date": "2025-08-22", "symbol": "QBTS", "action": "buy", "shares": 6.8966, "amount_usd": -103.44},
+  {"date": "2025-08-22", "symbol": "META", "action": "buy", "shares": 0.0743, "amount_usd": -54.98},
+  {"date": "2025-08-22", "symbol": "KO", "action": "buy", "shares": 1.9876, "amount_usd": -124.99},
+  
+  {"date": "2025-08-21", "symbol": "V", "action": "sell", "shares": 0.4321, "amount_usd": 115.67},
+  {"date": "2025-08-21", "symbol": "MA", "action": "buy", "shares": 0.2987, "amount_usd": -139.99},
+  {"date": "2025-08-21", "symbol": "DIS", "action": "sell", "shares": 1.4567, "amount_usd": 132.45},
+  
+  {"date": "2025-08-20", "symbol": "V", "action": "buy", "shares": 0.4321, "amount_usd": -112.50},
+  {"date": "2025-08-20", "symbol": "DIS", "action": "buy", "shares": 1.4567, "amount_usd": -129.99},
+  {"date": "2025-08-20", "symbol": "NFLX", "action": "sell", "shares": 0.2345, "amount_usd": 156.78},
+  
+  {"date": "2025-08-19", "symbol": "NFLX", "action": "buy", "shares": 0.2345, "amount_usd": -149.99},
+  {"date": "2025-08-19", "symbol": "CRM", "action": "sell", "shares": 0.5432, "amount_usd": 143.21},
+  {"date": "2025-08-19", "symbol": "ORCL", "action": "buy", "shares": 1.0987, "amount_usd": -159.99},
+  
+  {"date": "2025-08-18", "symbol": "CRM", "action": "buy", "shares": 0.5432, "amount_usd": -139.99},
+  {"date": "2025-08-18", "symbol": "ADBE", "action": "sell", "shares": 0.2109, "amount_usd": 118.90},
+  {"date": "2025-08-18", "symbol": "NOW", "action": "buy", "shares": 0.1876, "amount_usd": -179.99},
+  
+  {"date": "2025-08-17", "symbol": "ADBE", "action": "buy", "shares": 0.2109, "amount_usd": -115.00},
+  {"date": "2025-08-17", "symbol": "TEAM", "action": "sell", "shares": 0.7654, "amount_usd": 154.32},
+  {"date": "2025-08-17", "symbol": "ZM", "action": "buy", "shares": 2.3456, "amount_usd": -149.99},
+  
+  {"date": "2025-08-16", "symbol": "TEAM", "action": "buy", "shares": 0.7654, "amount_usd": -149.99},
+  {"date": "2025-08-16", "symbol": "OKTA", "action": "sell", "shares": 1.3456, "amount_usd": 132.78},
+  {"date": "2025-08-16", "symbol": "DOCU", "action": "buy", "shares": 3.2109, "amount_usd": -179.99},
+  
+  {"date": "2025-08-15", "symbol": "OKTA", "action": "buy", "shares": 1.3456, "amount_usd": -129.99},
+  {"date": "2025-08-15", "symbol": "WDAY", "action": "sell", "shares": 0.4567, "amount_usd": 127.89},
+  {"date": "2025-08-15", "symbol": "SPLK", "action": "buy", "shares": 0.8765, "amount_usd": -139.99},
+  
+  {"date": "2025-08-14", "symbol": "WDAY", "action": "buy", "shares": 0.4567, "amount_usd": -124.99},
+  {"date": "2025-08-14", "symbol": "PANW", "action": "sell", "shares": 0.3210, "amount_usd": 165.43},
+  {"date": "2025-08-14", "symbol": "FTNT", "action": "buy", "shares": 2.1098, "amount_usd": -159.99},
+  
+  {"date": "2025-08-13", "symbol": "PANW", "action": "buy", "shares": 0.3210, "amount_usd": -159.99},
+  {"date": "2025-08-13", "symbol": "ZS", "action": "sell", "shares": 0.6789, "amount_usd": 134.56},
+  {"date": "2025-08-13", "symbol": "CYBR", "action": "buy", "shares": 0.5432, "amount_usd": -129.99},
+  
+  {"date": "2025-08-12", "symbol": "ZS", "action": "buy", "shares": 0.6789, "amount_usd": -129.99},
+  {"date": "2025-08-12", "symbol": "FEYE", "action": "sell", "shares": 6.7890, "amount_usd": 98.76},
+  {"date": "2025-08-12", "symbol": "S", "action": "buy", "shares": 15.4321, "amount_usd": -119.99},
+  
+  {"date": "2025-08-11", "symbol": "FEYE", "action": "buy", "shares": 6.7890, "amount_usd": -95.00},
+  {"date": "2025-08-11", "symbol": "DBX", "action": "sell", "shares": 4.5678, "amount_usd": 112.34},
+  {"date": "2025-08-11", "symbol": "BOX", "action": "buy", "shares": 3.8765, "amount_usd": -109.99},
+  
+  {"date": "2025-08-10", "symbol": "DBX", "action": "buy", "shares": 4.5678, "amount_usd": -109.99},
+  {"date": "2025-08-10", "symbol": "WORK", "action": "sell", "shares": 2.6543, "amount_usd": 125.67},
+  {"date": "2025-08-10", "symbol": "FIVN", "action": "buy", "shares": 1.2109, "amount_usd": -119.99},
+  
+  {"date": "2025-08-09", "symbol": "WORK", "action": "buy", "shares": 2.6543, "amount_usd": -119.99},
+  {"date": "2025-08-09", "symbol": "ESTC", "action": "sell", "shares": 1.4567, "amount_usd": 147.89},
+  {"date": "2025-08-09", "symbol": "MDB", "action": "buy", "shares": 0.0876, "amount_usd": -179.99},
+  
+  {"date": "2025-08-08", "symbol": "ESTC", "action": "buy", "shares": 1.4567, "amount_usd": -142.50},
+  {"date": "2025-08-08", "symbol": "DDOG", "action": "sell", "shares": 1.2345, "amount_usd": 134.78},
+  {"date": "2025-08-08", "symbol": "SNOW", "action": "buy", "shares": 0.8976, "amount_usd": -129.99},
+  
+  {"date": "2025-08-07", "symbol": "DDOG", "action": "buy", "shares": 1.2345, "amount_usd": -129.99},
+  {"date": "2025-08-07", "symbol": "CFLT", "action": "sell", "shares": 2.9876, "amount_usd": 187.65},
+  {"date": "2025-08-07", "symbol": "PATH", "action": "buy", "shares": 8.7654, "amount_usd": -179.99},
+  
+  {"date": "2025-08-06", "symbol": "CFLT", "action": "buy", "shares": 2.9876, "amount_usd": -179.99},
+  {"date": "2025-08-06", "symbol": "SUMO", "action": "sell", "shares": 14.5678, "amount_usd": 145.67},
+  {"date": "2025-08-06", "symbol": "NCNO", "action": "buy", "shares": 5.4321, "amount_usd": -139.99},
+  
+  {"date": "2025-08-05", "symbol": "SUMO", "action": "buy", "shares": 14.5678, "amount_usd": -139.99},
+  {"date": "2025-08-05", "symbol": "GTLB", "action": "sell", "shares": 1.8765, "amount_usd": 167.89},
+  {"date": "2025-08-05", "symbol": "PD", "action": "buy", "shares": 4.3210, "amount_usd": -159.99},
+  
+  {"date": "2025-08-04", "symbol": "AMZN", "action": "buy", "shares": 0.5138, "amount_usd": -109.99},
+  {"date": "2025-08-04", "symbol": "GTLB", "action": "buy", "shares": 1.8765, "amount_usd": -159.99},
+  {"date": "2025-08-04", "symbol": "BILL", "action": "sell", "shares": 2.6543, "amount_usd": 178.92},
+  
+  {"date": "2025-08-03", "symbol": null, "action": "tax_july", "shares": null, "amount_usd": -12.85},
+  {"date": "2025-08-03", "symbol": "BILL", "action": "buy", "shares": 2.6543, "amount_usd": -169.99},
+  {"date": "2025-08-03", "symbol": "COUP", "action": "sell", "shares": 14.7890, "amount_usd": 156.78},
+  
+  {"date": "2025-08-02", "symbol": null, "action": "deposit", "shares": null, "amount_usd": 300.00},
+  {"date": "2025-08-02", "symbol": "COUP", "action": "buy", "shares": 14.7890, "amount_usd": -149.99},
+  {"date": "2025-08-02", "symbol": "VEEV", "action": "sell", "shares": 0.6789, "amount_usd": 134.56},
+  
+  {"date": "2025-08-01", "symbol": "INTW", "action": "sell", "shares": 12.5, "amount_usd": 180.04},
+  {"date": "2025-08-01", "symbol": "VEEV", "action": "buy", "shares": 0.6789, "amount_usd": -129.99},
+  {"date": "2025-08-01", "symbol": "CZR", "action": "sell", "shares": 3.4567, "amount_usd": 142.78}
+]

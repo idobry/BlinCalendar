@@ -21,6 +21,16 @@ export default function Home() {
     setSummary(processed.summary);
   };
 
+  const loadMockData = async () => {
+    try {
+      const response = await fetch('/mock-data.json');
+      const mockData = await response.json();
+      handleDataLoaded(mockData);
+    } catch (error) {
+      console.error('Error loading mock data:', error);
+    }
+  };
+
   const getAvailableMonths = () => {
     if (dailyData.length === 0) return [];
     
@@ -56,6 +66,15 @@ export default function Home() {
           </div>
           <div className="tv-panel-content">
             <FileUpload onDataLoaded={handleDataLoaded} />
+            <div style={{ marginTop: '20px', textAlign: 'center' }}>
+              <button
+                onClick={loadMockData}
+                className="tv-button-secondary"
+                style={{ marginTop: '10px' }}
+              >
+                Load Mock Data (For Testing)
+              </button>
+            </div>
           </div>
         </div>
       ) : (

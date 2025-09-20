@@ -270,16 +270,17 @@ body {
 }
 
 .tv-calendar-day {
-  aspect-ratio: 1;
+  min-height: 80px;
   border: 1px solid var(--tv-border);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 8px;
+  padding: 6px;
   font-size: 14px;
   cursor: pointer;
   transition: all 0.2s ease;
   position: relative;
+  overflow: hidden;
 }
 
 .tv-calendar-day:hover {
@@ -310,6 +311,12 @@ body {
   font-size: 10px;
   font-weight: 600;
   text-align: right;
+  line-height: 1.2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  flex-shrink: 0;
 }
 
 /* Scrollbar styling */
