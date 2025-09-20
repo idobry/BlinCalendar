@@ -1,214 +1,258 @@
 @import "tailwindcss";
 
 :root {
-  /* TradingView Color Scheme */
-  --tv-background: #131722;
-  --tv-surface: #1e222d;
-  --tv-surface-light: #2a2e39;
-  --tv-border: #363a45;
-  --tv-text-primary: #d1d4dc;
-  --tv-text-secondary: #868ca0;
-  --tv-text-muted: #5d606b;
-  --tv-accent: #2962ff;
-  --tv-accent-hover: #3b73ff;
-  --tv-green: #4caf50;
-  --tv-red: #f44336;
-  --tv-yellow: #ff9800;
-  --tv-purple: #9c27b0;
-  --tv-cyan: #00bcd4;
+  /* v0 Aesthetic Color Scheme */
+  --v0-background: #0a0a0a;          /* Deep charcoal - gray-950 */
+  --v0-surface: #1a1a1a;             /* Elevated dark gray - gray-900 */
+  --v0-surface-light: #262626;       /* Subtle borders - gray-800 */
+  --v0-border: #262626;              /* Clean separation - gray-800 */
+  --v0-text-primary: #ffffff;        /* High contrast white */
+  --v0-text-secondary: #a3a3a3;      /* Muted gray - gray-400 */
+  --v0-text-muted: #737373;          /* Darker muted text - gray-500 */
+  --v0-accent: #10b981;              /* Emerald-500 primary brand */
+  --v0-accent-hover: #059669;        /* Emerald-600 hover state */
+  --v0-green: #10b981;               /* Emerald-500 for profits */
+  --v0-red: #ef4444;                 /* Red-500 for losses */
+  --v0-yellow: #f59e0b;              /* Amber-500 for neutral */
+  --v0-purple: #8b5cf6;              /* Violet-500 */
+  --v0-cyan: #06b6d4;                /* Cyan-500 */
   
-  --background: var(--tv-background);
-  --foreground: var(--tv-text-primary);
+  --background: var(--v0-background);
+  --foreground: var(--v0-text-primary);
 }
 
 body {
-  background: var(--tv-background);
-  color: var(--tv-text-primary);
+  background: var(--v0-background);
+  color: var(--v0-text-primary);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   margin: 0;
   padding: 0;
-  line-height: 1.5;
+  line-height: 1.6;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* TradingView UI Components */
+* {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Typography hierarchy */
+h1 { font-size: 2rem; font-weight: 600; line-height: 1.2; margin-bottom: 1rem; }
+h2 { font-size: 1.5rem; font-weight: 600; line-height: 1.3; margin-bottom: 0.75rem; }
+h3 { font-size: 1.25rem; font-weight: 500; line-height: 1.4; margin-bottom: 0.5rem; }
+h4 { font-size: 1rem; font-weight: 500; line-height: 1.4; margin-bottom: 0.5rem; }
+
+/* Monospace for trading data */
+.mono { font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; }
+
+/* v0 Aesthetic UI Components */
 .tv-panel {
-  background: var(--tv-surface);
-  border: 1px solid var(--tv-border);
-  border-radius: 4px;
+  background: var(--v0-surface);
+  border: 1px solid var(--v0-border);
+  border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .tv-panel-header {
-  background: var(--tv-surface-light);
-  border-bottom: 1px solid var(--tv-border);
-  padding: 12px 16px;
-  font-weight: 600;
-  font-size: 14px;
-  color: var(--tv-text-primary);
+  background: var(--v0-surface-light);
+  border-bottom: 1px solid var(--v0-border);
+  padding: 16px 20px;
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--v0-text-primary);
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 .tv-panel-content {
-  padding: 16px;
+  padding: 20px;
 }
 
 .tv-button {
-  background: var(--tv-accent);
+  background: var(--v0-accent);
   color: white;
   border: none;
-  border-radius: 4px;
-  padding: 8px 16px;
+  border-radius: 8px;
+  padding: 12px 20px;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease-in-out;
   font-family: inherit;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
 
 .tv-button:hover {
-  background: var(--tv-accent-hover);
+  background: var(--v0-accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px -2px rgba(16, 185, 129, 0.25);
 }
 
 .tv-button-secondary {
-  background: var(--tv-surface-light);
-  color: var(--tv-text-primary);
-  border: 1px solid var(--tv-border);
+  background: var(--v0-surface-light);
+  color: var(--v0-text-primary);
+  border: 1px solid var(--v0-border);
 }
 
 .tv-button-secondary:hover {
-  background: var(--tv-border);
+  background: var(--v0-border);
+  transform: translateY(-1px);
 }
 
 .tv-button-small {
-  padding: 6px 12px;
-  font-size: 12px;
+  padding: 8px 16px;
+  font-size: 13px;
 }
 
 .tv-input {
-  background: var(--tv-surface);
-  border: 1px solid var(--tv-border);
-  border-radius: 4px;
-  color: var(--tv-text-primary);
-  padding: 8px 12px;
+  background: var(--v0-surface);
+  border: 1px solid var(--v0-border);
+  border-radius: 8px;
+  color: var(--v0-text-primary);
+  padding: 12px 16px;
   font-size: 14px;
   font-family: inherit;
   width: 100%;
+  transition: all 0.25s ease-in-out;
 }
 
 .tv-input:focus {
   outline: none;
-  border-color: var(--tv-accent);
-  box-shadow: 0 0 0 2px rgba(41, 98, 255, 0.2);
+  border-color: var(--v0-accent);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+.tv-input::placeholder {
+  color: var(--v0-text-muted);
 }
 
 .tv-select {
-  background: var(--tv-surface);
-  border: 1px solid var(--tv-border);
-  border-radius: 4px;
-  color: var(--tv-text-primary);
-  padding: 8px 12px;
+  background: var(--v0-surface);
+  border: 1px solid var(--v0-border);
+  border-radius: 8px;
+  color: var(--v0-text-primary);
+  padding: 12px 16px;
   font-size: 14px;
   cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+
+.tv-select:focus {
+  outline: none;
+  border-color: var(--v0-accent);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
 }
 
 .tv-tabs {
   display: flex;
-  border-bottom: 1px solid var(--tv-border);
-  background: var(--tv-surface);
+  border-bottom: 1px solid var(--v0-border);
+  background: var(--v0-surface);
+  border-radius: 12px 12px 0 0;
 }
 
 .tv-tab {
-  padding: 12px 16px;
+  padding: 16px 20px;
   font-size: 14px;
   font-weight: 500;
-  color: var(--tv-text-secondary);
+  color: var(--v0-text-secondary);
   background: none;
   border: none;
   cursor: pointer;
   border-bottom: 2px solid transparent;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease-in-out;
 }
 
 .tv-tab:hover {
-  color: var(--tv-text-primary);
-  background: var(--tv-surface-light);
+  color: var(--v0-text-primary);
+  background: var(--v0-surface-light);
 }
 
 .tv-tab.active {
-  color: var(--tv-accent);
-  border-bottom-color: var(--tv-accent);
+  color: var(--v0-accent);
+  border-bottom-color: var(--v0-accent);
 }
 
 .tv-metric-card {
-  background: var(--tv-surface);
-  border: 1px solid var(--tv-border);
-  border-radius: 6px;
-  padding: 16px;
+  background: var(--v0-surface);
+  border: 1px solid var(--v0-border);
+  border-radius: 12px;
+  padding: 24px;
   text-align: center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 0.25s ease-in-out;
+}
+
+.tv-metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px -8px rgba(0, 0, 0, 0.25);
 }
 
 .tv-metric-value {
-  font-size: 24px;
-  font-weight: 700;
-  margin-bottom: 4px;
-  line-height: 1.2;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.1;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
 }
 
 .tv-metric-label {
-  font-size: 12px;
-  color: var(--tv-text-secondary);
+  font-size: 13px;
+  color: var(--v0-text-secondary);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.75px;
   font-weight: 500;
 }
 
 .tv-positive {
-  color: var(--tv-green);
+  color: var(--v0-green);
 }
 
 .tv-negative {
-  color: var(--tv-red);
+  color: var(--v0-red);
 }
 
 .tv-neutral {
-  color: var(--tv-text-primary);
+  color: var(--v0-text-primary);
 }
 
 /* Layout */
 .tv-container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 16px;
+  padding: 24px;
 }
 
 .tv-header {
-  background: var(--tv-surface);
-  border-bottom: 1px solid var(--tv-border);
-  padding: 12px 0;
-  margin-bottom: 16px;
+  background: var(--v0-surface);
+  border-bottom: 1px solid var(--v0-border);
+  padding: 16px 0;
+  margin-bottom: 32px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 }
 
 .tv-header-content {
   display: flex;
   align-items: center;
-  justify-content: between;
+  justify-content: space-between;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 16px;
+  padding: 0 24px;
 }
 
 .tv-logo {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--tv-text-primary);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--v0-text-primary);
   margin: 0;
+  letter-spacing: -0.025em;
 }
 
 .tv-grid {
   display: grid;
-  gap: 16px;
+  gap: 24px;
   grid-template-columns: 1fr;
 }
 
@@ -238,20 +282,32 @@ body {
   grid-column: span 2;
 }
 
+/* 8px spacing system */
+.space-1 { margin: 8px; }
+.space-2 { margin: 16px; }
+.space-3 { margin: 24px; }
+.space-4 { margin: 32px; }
+.gap-1 { gap: 8px; }
+.gap-2 { gap: 16px; }
+.gap-3 { gap: 24px; }
+.gap-4 { gap: 32px; }
+
 /* Calendar specific */
 .tv-calendar {
-  background: var(--tv-surface);
-  border: 1px solid var(--tv-border);
-  border-radius: 6px;
+  background: var(--v0-surface);
+  border: 1px solid var(--v0-border);
+  border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .tv-calendar-header {
-  background: var(--tv-surface-light);
-  padding: 16px;
-  border-bottom: 1px solid var(--tv-border);
-  font-weight: 600;
+  background: var(--v0-surface-light);
+  padding: 20px;
+  border-bottom: 1px solid var(--v0-border);
+  font-weight: 500;
   text-align: center;
+  font-size: 18px;
 }
 
 .tv-calendar-grid {
@@ -260,63 +316,73 @@ body {
 }
 
 .tv-calendar-day-header {
-  padding: 8px 4px;
+  padding: 12px 8px;
   text-align: center;
-  font-size: 12px;
-  color: var(--tv-text-secondary);
+  font-size: 13px;
+  color: var(--v0-text-secondary);
   font-weight: 500;
-  background: var(--tv-surface-light);
-  border-bottom: 1px solid var(--tv-border);
+  background: var(--v0-surface-light);
+  border-bottom: 1px solid var(--v0-border);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .tv-calendar-day {
-  min-height: 80px;
-  border: 1px solid var(--tv-border);
+  min-height: 90px;
+  border: 1px solid var(--v0-border);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 6px;
+  padding: 12px;
   font-size: 14px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease-in-out;
   position: relative;
   overflow: hidden;
+  background: var(--v0-surface);
 }
 
 .tv-calendar-day:hover {
-  background: var(--tv-surface-light);
+  background: var(--v0-surface-light);
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.15);
 }
 
 .tv-calendar-day.profit {
-  background: rgba(76, 175, 80, 0.1);
-  border-color: var(--tv-green);
+  background: rgba(16, 185, 129, 0.05);
+  border-color: var(--v0-green);
+  box-shadow: inset 0 0 0 1px rgba(16, 185, 129, 0.1);
 }
 
 .tv-calendar-day.loss {
-  background: rgba(244, 67, 54, 0.1);
-  border-color: var(--tv-red);
+  background: rgba(239, 68, 68, 0.05);
+  border-color: var(--v0-red);
+  box-shadow: inset 0 0 0 1px rgba(239, 68, 68, 0.1);
 }
 
 .tv-calendar-day.neutral {
-  background: rgba(255, 152, 0, 0.1);
-  border-color: var(--tv-yellow);
+  background: rgba(245, 158, 11, 0.05);
+  border-color: var(--v0-yellow);
+  box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.1);
 }
 
 .tv-calendar-day-number {
-  font-weight: 600;
-  color: var(--tv-text-primary);
+  font-weight: 500;
+  color: var(--v0-text-primary);
+  font-size: 16px;
 }
 
 .tv-calendar-day-amount {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
   text-align: right;
-  line-height: 1.2;
+  line-height: 1.3;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 2px;
+  gap: 4px;
   flex-shrink: 0;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
 }
 
 /* Scrollbar styling */
@@ -326,14 +392,20 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--tv-surface);
+  background: var(--v0-surface);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--tv-border);
+  background: var(--v0-border);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--tv-text-muted);
+  background: var(--v0-text-muted);
+}
+
+/* Focus indicators for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--v0-accent);
+  outline-offset: 2px;
 }

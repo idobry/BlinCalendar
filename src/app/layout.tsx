@@ -5,11 +5,16 @@ import "./globals.css";
 const inter = Inter({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-inter',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
   title: "BlinCalendar",
-  description: "Professional trading journal with TradingView-style interface",
+  description: "Professional trading journal with sleek v0 aesthetic - track your trades with confidence",
+  keywords: "trading journal, trade tracker, financial analytics, professional trading",
+  authors: [{ name: "BlinCalendar" }],
+  viewport: "width=device-width, initial-scale=1",
 };
 
 export default function RootLayout({
@@ -18,21 +23,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.variable}>
       <body className={inter.className}>
         <div className="tv-header">
           <div className="tv-header-content">
             <h1 className="tv-logo">BlinCalendar</h1>
-            <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-              <span style={{ fontSize: '14px', color: 'var(--tv-text-secondary)' }}>
-               
+            <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+              <span style={{ 
+                fontSize: '14px', 
+                color: 'var(--v0-text-secondary)',
+                fontWeight: '500'
+              }}>
+                Professional Trading Journal
               </span>
             </div>
           </div>
         </div>
-        <div className="tv-container">
+        <main className="tv-container">
           {children}
-        </div>
+        </main>
       </body>
     </html>
   );

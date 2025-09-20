@@ -57,17 +57,53 @@ export default function Calendar({ dailyData, year, month, isCompact = false, mo
 
   return (
     <>
-      <div className="tv-calendar">
+      <div className="tv-calendar" style={{ 
+        transition: 'all 0.3s ease-in-out',
+        ...(isCompact ? { transform: 'scale(0.95)', opacity: '0.9' } : {})
+      }}>
         <div className="tv-calendar-header">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-            <span>{MONTH_NAMES[month]}, {year}</span>
-            {monthlyProfitLoss !== 0 && (
-              <span 
-                className={monthlyProfitLoss >= 0 ? 'tv-positive' : 'tv-negative'} 
-                style={{ fontWeight: 'bold' }}
-              >
-                {monthlyProfitLoss.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+            <div>
+              <span style={{ 
+                fontSize: isCompact ? '16px' : '18px', 
+                fontWeight: '500',
+                color: 'var(--v0-text-primary)'
+              }}>
+                {MONTH_NAMES[month]} {year}
               </span>
+              {!isCompact && (
+                <div style={{ 
+                  fontSize: '13px', 
+                  color: 'var(--v0-text-secondary)',
+                  marginTop: '2px'
+                }}>
+                  {dailyData.filter(d => d.hasActivity).length} trading days
+                </div>
+              )}
+            </div>
+            {monthlyProfitLoss !== 0 && (
+              <div style={{ textAlign: 'right' }}>
+                <div 
+                  className={`${monthlyProfitLoss >= 0 ? 'tv-positive' : 'tv-negative'} mono`}
+                  style={{ 
+                    fontWeight: '600',
+                    fontSize: isCompact ? '14px' : '16px'
+                  }}
+                >
+                  {monthlyProfitLoss.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+                </div>
+                {!isCompact && (
+                  <div style={{ 
+                    fontSize: '11px', 
+                    color: 'var(--v0-text-secondary)',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.5px',
+                    marginTop: '2px'
+                  }}>
+                    Monthly P&L
+                  </div>
+                )}
+              </div>
             )}
           </div>
         </div>
@@ -101,10 +137,11 @@ export default function Calendar({ dailyData, year, month, isCompact = false, mo
                   {dayData.hasActivity && (
                     <div className="tv-calendar-day-amount">
                       <div style={{ 
-                        fontWeight: 'bold',
-                        color: dayData.totalProfit > 0 ? 'var(--tv-green)' : 
-                               dayData.totalProfit < 0 ? 'var(--tv-red)' : 
-                               'var(--tv-yellow)'
+                        fontWeight: '600',
+                        color: dayData.totalProfit > 0 ? 'var(--v0-green)' : 
+                               dayData.totalProfit < 0 ? 'var(--v0-red)' : 
+                               'var(--v0-yellow)',
+                        textShadow: dayData.totalProfit !== 0 ? '0 1px 2px rgba(0, 0, 0, 0.1)' : 'none'
                       }}>
                         {isCompact ? 
                           (dayData.totalProfit >= 0 ? '+' : '') + Math.round(dayData.totalProfit) :
@@ -112,9 +149,25 @@ export default function Calendar({ dailyData, year, month, isCompact = false, mo
                         }
                       </div>
                       {!isCompact && (
-                        <div style={{ fontSize: '10px', opacity: 0.8 }}>
-                          {dayData.totalTrades}T
+                        <div style={{ 
+                          fontSize: '10px', 
+                          opacity: 0.75,
+                          color: 'var(--v0-text-secondary)',
+                          fontWeight: '500'
+                        }}>
+                          {dayData.totalTrades} trade{dayData.totalTrades !== 1 ? 's' : ''}
                         </div>
+                      )}
+                      {isCompact && dayData.totalTrades > 0 && (
+                        <div style={{
+                          width: '6px',
+                          height: '6px',
+                          borderRadius: '50%',
+                          backgroundColor: dayData.totalProfit > 0 ? 'var(--v0-green)' : 
+                                         dayData.totalProfit < 0 ? 'var(--v0-red)' : 
+                                         'var(--v0-yellow)',
+                          marginTop: '2px'
+                        }} />
                       )}
                     </div>
                   )}
