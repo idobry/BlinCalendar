@@ -12,95 +12,73 @@ export default function SummaryStats({ summary }: SummaryStatsProps) {
     {
       label: 'Total Invested',
       value: formatCurrency(summary.totalInvested),
-      className: 'text-blue-600 dark:text-blue-400'
+      type: 'neutral' as const
     },
     {
-      label: 'Total Profit/Loss',
+      label: 'Total P&L',
       value: formatCurrency(summary.totalProfit),
-      className: summary.totalProfit >= 0 
-        ? 'text-green-600 dark:text-green-400' 
-        : 'text-red-600 dark:text-red-400'
+      type: summary.totalProfit >= 0 ? 'positive' as const : 'negative' as const
     },
     {
-      label: 'Total Wins',
+      label: 'Wins',
       value: summary.totalWins.toString(),
-      className: 'text-green-600 dark:text-green-400'
+      type: 'positive' as const
     },
     {
-      label: 'Total Losses',
+      label: 'Losses',
       value: summary.totalLosses.toString(),
-      className: 'text-red-600 dark:text-red-400'
+      type: 'negative' as const
     },
     {
       label: 'Win Rate',
       value: formatPercentage(summary.winRate),
-      className: summary.winRate >= 50 
-        ? 'text-green-600 dark:text-green-400' 
-        : 'text-red-600 dark:text-red-400'
+      type: summary.winRate >= 50 ? 'positive' as const : 'negative' as const
     },
     {
       label: 'Total Trades',
       value: summary.totalTrades.toString(),
-      className: 'text-gray-700 dark:text-gray-300'
+      type: 'neutral' as const
+    },
+    {
+      label: 'Avg P&L per Trade',
+      value: summary.totalTrades > 0 
+        ? formatCurrency(summary.totalProfit / summary.totalTrades)
+        : '$0.00',
+      type: summary.totalTrades > 0 && (summary.totalProfit / summary.totalTrades) >= 0 
+        ? 'positive' as const : 'negative' as const
+    },
+    {
+      label: 'ROI',
+      value: summary.totalInvested > 0 
+        ? formatPercentage((summary.totalProfit / summary.totalInvested) * 100)
+        : '0.0%',
+      type: summary.totalInvested > 0 && (summary.totalProfit / summary.totalInvested) >= 0
+        ? 'positive' as const : 'negative' as const
     }
   ];
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-      <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-        Trading Summary
-      </h2>
-      
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-        {stats.map((stat, index) => (
-          <div
-            key={index}
-            className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 text-center"
-          >
-            <div className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">
-              {stat.label}
-            </div>
-            <div className={`text-2xl font-bold ${stat.className}`}>
-              {stat.value}
-            </div>
-          </div>
-        ))}
+    <div className="tv-panel">
+      <div className="tv-panel-header">
+        Portfolio Performance
       </div>
       
-      {/* Additional insights */}
-      <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-600">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="text-center">
-            <div className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">
-              Average Profit per Trade
+      <div className="tv-panel-content">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
+          {stats.map((stat, index) => (
+            <div key={index} className="tv-metric-card">
+              <div className="tv-metric-label">
+                {stat.label}
+              </div>
+              <div className={`tv-metric-value ${
+                stat.type === 'positive' ? 'tv-positive' : 
+                stat.type === 'negative' ? 'tv-negative' : 
+                'tv-neutral'
+              }`}>
+                {stat.value}
+              </div>
             </div>
-            <div className={`text-xl font-bold ${
-              summary.totalTrades > 0 && (summary.totalProfit / summary.totalTrades) >= 0
-                ? 'text-green-600 dark:text-green-400'
-                : 'text-red-600 dark:text-red-400'
-            }`}>
-              {summary.totalTrades > 0 
-                ? formatCurrency(summary.totalProfit / summary.totalTrades)
-                : '$0.00'
-              }
-            </div>
-          </div>
-          
-          <div className="text-center">
-            <div className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">
-              Return on Investment
-            </div>
-            <div className={`text-xl font-bold ${
-              summary.totalInvested > 0 && (summary.totalProfit / summary.totalInvested) >= 0
-                ? 'text-green-600 dark:text-green-400'
-                : 'text-red-600 dark:text-red-400'
-            }`}>
-              {summary.totalInvested > 0 
-                ? formatPercentage((summary.totalProfit / summary.totalInvested) * 100)
-                : '0.0%'
-              }
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>

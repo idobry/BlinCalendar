@@ -17,91 +17,120 @@ export default function TradePopup({ dayData, onClose }: TradePopupProps) {
 
   return (
     <div 
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+      style={{
+        position: 'fixed',
+        inset: 0,
+        background: 'rgba(0, 0, 0, 0.75)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 1000,
+        padding: '16px'
+      }}
       onClick={handleBackdropClick}
     >
-      <div className="bg-gray-800 rounded-lg p-6 max-w-md w-full max-h-96 overflow-y-auto">
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="text-xl font-bold text-white">
+      <div className="tv-panel" style={{ maxWidth: '600px', width: '100%', maxHeight: '80vh', overflow: 'hidden' }}>
+        <div className="tv-panel-header">
+          <span>
             {new Date(dayData.date).toLocaleDateString('en-US', {
               weekday: 'long',
               year: 'numeric',
               month: 'long',
               day: 'numeric'
             })}
-          </h3>
+          </span>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-white text-xl font-bold"
+            className="tv-button-secondary tv-button-small"
           >
             ×
           </button>
         </div>
 
-        <div className="mb-4">
-          <div className="text-sm text-gray-400 mb-1">Daily Summary</div>
-          <div className="flex justify-between items-center">
-            <span className="text-white">Total P&L:</span>
-            <span className={`font-bold ${dayData.totalProfit >= 0 ? 'text-green-400' : 'text-red-400'}`}>
-              {formatCurrency(dayData.totalProfit)}
-            </span>
-          </div>
-          <div className="flex justify-between items-center">
-            <span className="text-white">Trades:</span>
-            <span className="text-gray-300">{dayData.totalTrades}</span>
-          </div>
-        </div>
-
-        <div className="space-y-3">
-          <div className="text-sm text-gray-400 mb-2">Trade Details</div>
-          {dayData.trades.map((trade, index) => (
-            <div key={index} className="bg-gray-700 rounded-lg p-3">
-              <div className="flex justify-between items-center mb-2">
-                <span className="font-bold text-white">{trade.symbol}</span>
-                <span className={`font-bold ${trade.profit >= 0 ? 'text-green-400' : 'text-red-400'}`}>
-                  {formatCurrency(trade.profit)}
-                </span>
+        <div className="tv-panel-content" style={{ maxHeight: '60vh', overflow: 'auto' }}>
+          {/* Daily Summary */}
+          <div style={{ marginBottom: '24px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+              <div className="tv-metric-card">
+                <div className="tv-metric-label">Total P&L</div>
+                <div className={`tv-metric-value ${dayData.totalProfit >= 0 ? 'tv-positive' : 'tv-negative'}`}>
+                  {formatCurrency(dayData.totalProfit)}
+                </div>
               </div>
-              
-              <div className="text-xs space-y-1 text-gray-300">
-                <div className="flex justify-between">
-                  <span>Buy Date:</span>
-                  <span>{new Date(trade.buyDate).toLocaleDateString()}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Sell Date:</span>
-                  <span>{new Date(trade.sellDate).toLocaleDateString()}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Shares:</span>
-                  <span>{trade.shares.toFixed(4)}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Buy Amount:</span>
-                  <span>{formatCurrency(trade.buyAmount)}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Sell Amount:</span>
-                  <span>{formatCurrency(trade.sellAmount)}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Return:</span>
-                  <span className={trade.profitPercentage >= 0 ? 'text-green-400' : 'text-red-400'}>
-                    {formatPercentage(trade.profitPercentage)}
-                  </span>
+              <div className="tv-metric-card">
+                <div className="tv-metric-label">Trades</div>
+                <div className="tv-metric-value tv-neutral">
+                  {dayData.totalTrades}
                 </div>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
 
-        <div className="mt-4 text-center">
-          <button
-            onClick={onClose}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
-          >
-            Close
-          </button>
+          {/* Trade Details */}
+          <div>
+            <h4 style={{ 
+              color: 'var(--tv-text-primary)', 
+              fontSize: '14px', 
+              fontWeight: '600', 
+              marginBottom: '16px',
+              textTransform: 'uppercase',
+              letterSpacing: '0.5px'
+            }}>
+              Trade Details
+            </h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              {dayData.trades.map((trade, index) => (
+                <div key={index} className="tv-panel" style={{ margin: 0 }}>
+                  <div className="tv-panel-header">
+                    <span style={{ fontWeight: 'bold' }}>{trade.symbol}</span>
+                    <span className={`${trade.profit >= 0 ? 'tv-positive' : 'tv-negative'}`} style={{ fontWeight: 'bold' }}>
+                      {formatCurrency(trade.profit)}
+                    </span>
+                  </div>
+                  
+                  <div className="tv-panel-content" style={{ padding: '12px' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', fontSize: '12px' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <span style={{ color: 'var(--tv-text-secondary)' }}>Buy Date:</span>
+                        <span>{new Date(trade.buyDate).toLocaleDateString()}</span>
+                      </div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <span style={{ color: 'var(--tv-text-secondary)' }}>Sell Date:</span>
+                        <span>{new Date(trade.sellDate).toLocaleDateString()}</span>
+                      </div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <span style={{ color: 'var(--tv-text-secondary)' }}>Shares:</span>
+                        <span>{trade.shares.toFixed(4)}</span>
+                      </div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <span style={{ color: 'var(--tv-text-secondary)' }}>Return:</span>
+                        <span className={trade.profitPercentage >= 0 ? 'tv-positive' : 'tv-negative'}>
+                          {formatPercentage(trade.profitPercentage)}
+                        </span>
+                      </div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <span style={{ color: 'var(--tv-text-secondary)' }}>Buy Amount:</span>
+                        <span>{formatCurrency(trade.buyAmount)}</span>
+                      </div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <span style={{ color: 'var(--tv-text-secondary)' }}>Sell Amount:</span>
+                        <span>{formatCurrency(trade.sellAmount)}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div style={{ marginTop: '24px', textAlign: 'center' }}>
+            <button
+              onClick={onClose}
+              className="tv-button"
+            >
+              Close
+            </button>
+          </div>
         </div>
       </div>
     </div>

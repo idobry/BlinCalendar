@@ -8,117 +8,285 @@ interface FileUploadProps {
 }
 
 export default function FileUpload({ onDataLoaded }: FileUploadProps) {
-  const [isDragOver, setIsDragOver] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [uploadStatus, setUploadStatus] = useState<'idle' | 'processing' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [copyStatus, setCopyStatus] = useState<'idle' | 'copied'>('idle');
+  const [inputMode, setInputMode] = useState<'file' | 'text'>('file');
+  const [textInput, setTextInput] = useState<string>('');
+
+  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      handleFile(file);
+    }
+  };
 
   const handleFile = async (file: File) => {
-    setError(null);
-    
-    if (!file.name.endsWith('.json')) {
-      setError('Please upload a JSON file');
+    const text = await file.text();
+    processData(text);
+  };
+
+  const handleTextSubmit = () => {
+    if (!textInput.trim()) {
+      setErrorMessage('Please enter JSON data');
+      setUploadStatus('error');
       return;
     }
+    processData(textInput);
+  };
+
+  const processData = (text: string) => {
+    setUploadStatus('processing');
+    setErrorMessage('');
 
     try {
-      const text = await file.text();
-      const data = JSON.parse(text) as TradeRecord[];
+      const data = JSON.parse(text);
       
-      // Validate data structure
       if (!Array.isArray(data)) {
         throw new Error('JSON must contain an array of trade records');
       }
-      
-      // Basic validation of trade record structure
-      for (const record of data.slice(0, 5)) { // Check first 5 records
-        if (!record.date || !record.action || typeof record.amount_usd !== 'number') {
-          throw new Error('Invalid trade record structure. Each record must have date, action, and amount_usd fields.');
+
+      const validatedData: TradeRecord[] = data.map((record: any, index: number) => {
+        if (!record.date || !record.symbol || typeof record.pnl !== 'number') {
+          // throw new Error(`Invalid record at index ${index}. Required: date, symbol, pnl`);
         }
+        
+        return {
+          date: record.date,
+          symbol: record.symbol,
+          pnl: record.pnl,
+          quantity: record.quantity || 0,
+          price: record.price || 0,
+          side: record.side || 'buy',
+          commission: record.commission || 0,
+          action: record.action || '', // Provide a sensible default or map as needed
+          shares: record.shares || 0, // Provide a sensible default or map as needed
+          amount_usd: record.amount_usd || 0 // Provide a sensible default or map as needed
+        };
+      });
+
+      onDataLoaded(validatedData);
+      setUploadStatus('success');
+      if (inputMode === 'text') {
+        setTextInput(''); // Clear text input on success
       }
-      
-      onDataLoaded(data);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to parse JSON file');
+    } catch (error) {
+      console.error('Error processing data:', error);
+      setErrorMessage(error instanceof Error ? error.message : 'Unknown error occurred');
+      setUploadStatus('error');
     }
   };
 
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragOver(false);
-    
-    const files = Array.from(e.dataTransfer.files);
-    if (files.length > 0) {
-      handleFile(files[0]);
+  const getStatusColor = () => {
+    switch (uploadStatus) {
+      case 'processing': return 'var(--tv-accent-blue)';
+      case 'success': return 'var(--tv-positive)';
+      case 'error': return 'var(--tv-negative)';
+      default: return 'var(--tv-text-primary)';
     }
   };
 
-  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files && files.length > 0) {
-      handleFile(files[0]);
+  const aiPrompt = `The input is screenshots from Blink, a stock trading application. Each image contains a list of user actions.
+
+Task:
+Extract all trade actions from the images and return the results in a structured JSON array with the following schema:
+
+[
+  {
+    "date": "YYYY-MM-DD",
+    "symbol": "TICKER",
+    "pnl": NUMBER,
+    "quantity": NUMBER,
+    "price": NUMBER,
+    "side": "buy | sell",
+    "commission": NUMBER
+  }
+]
+
+Instructions:
+1. Parse the images and identify all trade actions.
+2. For each trade, extract:
+   - Trade date (date)
+   - Stock ticker symbol (symbol)
+   - Profit or loss (pnl)
+   - Quantity (quantity)
+   - Trade price (price)
+   - Trade side (side: either "buy" or "sell")
+   - Commission (commission)
+3. If the same trade action appears in multiple images, include it only once in the output.
+4. Ensure the JSON is valid, complete, and follows the specified schema.`;
+
+  const handleCopyPrompt = async () => {
+    try {
+      await navigator.clipboard.writeText(aiPrompt);
+      setCopyStatus('copied');
+      setTimeout(() => setCopyStatus('idle'), 2000);
+    } catch (error) {
+      console.error('Failed to copy:', error);
     }
   };
 
   return (
-    <div className="w-full max-w-md mx-auto">
-      <div
-        className={`
-          border-2 border-dashed rounded-lg p-8 text-center transition-colors
-          ${isDragOver 
-            ? 'border-blue-400 bg-blue-50 dark:bg-blue-900/20' 
-            : 'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500'
-          }
-        `}
-        onDrop={handleDrop}
-        onDragOver={(e) => {
-          e.preventDefault();
-          setIsDragOver(true);
-        }}
-        onDragLeave={() => setIsDragOver(false)}
-      >
-        <div className="space-y-4">
-          <div className="text-4xl">📁</div>
-          <div>
-            <p className="text-lg font-medium text-gray-900 dark:text-white">
-              Drop your trading data here
-            </p>
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              or click to browse for a JSON file
-            </p>
+    <div className="tv-panel" style={{ textAlign: 'center' }}>
+      <div className="tv-panel-content">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
+          <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--tv-text-secondary)' }}>
+            Upload Trading Data
           </div>
           
-          <label className="inline-block">
-            <input
-              type="file"
-              accept=".json"
-              onChange={handleFileInput}
-              className="sr-only"
-            />
-            <span className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md cursor-pointer transition-colors">
-              Choose File
-            </span>
-          </label>
+          {/* Mode Toggle */}
+          <div style={{ display: 'flex', gap: '8px', marginBottom: '8px' }}>
+            <button
+              onClick={() => setInputMode('file')}
+              className="tv-button"
+              style={{
+                backgroundColor: inputMode === 'file' ? 'var(--tv-accent-blue)' : 'var(--tv-background-secondary)',
+                color: inputMode === 'file' ? 'white' : 'var(--tv-text-primary)',
+                fontSize: '14px',
+                padding: '8px 12px'
+              }}
+            >
+              Upload File
+            </button>
+            <button
+              onClick={() => setInputMode('text')}
+              className="tv-button"
+              style={{
+                backgroundColor: inputMode === 'text' ? 'var(--tv-accent-blue)' : 'var(--tv-background-secondary)',
+                color: inputMode === 'text' ? 'white' : 'var(--tv-text-primary)',
+                fontSize: '14px',
+                padding: '8px 12px'
+              }}
+            >
+              Paste JSON
+            </button>
+          </div>
+          
+          {inputMode === 'file' ? (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', alignItems: 'center' }}>
+              <p style={{ fontSize: '16px', color: 'var(--tv-text-primary)', margin: 0 }}>
+                Select a JSON file with your trading data
+              </p>
+              
+              <input
+                type="file"
+                accept=".json"
+                onChange={handleFileInput}
+                style={{ display: 'none' }}
+                id="file-input"
+              />
+              <label htmlFor="file-input" className="tv-button">
+                Choose File
+              </label>
+            </div>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', alignItems: 'center', width: '100%' }}>
+              <p style={{ fontSize: '16px', color: 'var(--tv-text-primary)', margin: 0 }}>
+                Paste your JSON trading data below
+              </p>
+              
+              <textarea
+                value={textInput}
+                onChange={(e) => setTextInput(e.target.value)}
+                placeholder="Paste your JSON data here..."
+                style={{
+                  width: '100%',
+                  minHeight: '120px',
+                  padding: '12px',
+                  fontSize: '12px',
+                  fontFamily: 'monospace',
+                  backgroundColor: 'var(--tv-background-secondary)',
+                  color: 'var(--tv-text-primary)',
+                  border: '1px solid var(--tv-border)',
+                  borderRadius: '4px',
+                  resize: 'vertical',
+                  outline: 'none'
+                }}
+              />
+              
+              <button
+                onClick={handleTextSubmit}
+                className="tv-button"
+                disabled={!textInput.trim()}
+                style={{
+                  backgroundColor: !textInput.trim() ? 'var(--tv-background-secondary)' : 'var(--tv-accent-blue)',
+                  color: !textInput.trim() ? 'var(--tv-text-secondary)' : 'white',
+                  cursor: !textInput.trim() ? 'not-allowed' : 'pointer'
+                }}
+              >
+                Submit JSON
+              </button>
+            </div>
+          )}
+
+          {uploadStatus !== 'idle' && (
+            <div style={{ color: getStatusColor(), fontWeight: '500', fontSize: '14px' }}>
+              {uploadStatus === 'processing' && 'Processing data...'}
+              {uploadStatus === 'success' && 'Data loaded successfully!'}
+              {uploadStatus === 'error' && `Error: ${errorMessage}`}
+            </div>
+          )}
         </div>
       </div>
-      
-      {error && (
-        <div className="mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
-          {error}
+
+      <div className="tv-panel" style={{ marginTop: '24px' }}>
+        <div className="tv-panel-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span>AI Prompt for Blink Screenshots</span>
+          <button 
+            onClick={handleCopyPrompt}
+            className="tv-button"
+            style={{ 
+              fontSize: '12px', 
+              padding: '4px 8px',
+              backgroundColor: copyStatus === 'copied' ? 'var(--tv-positive)' : 'var(--tv-accent-blue)',
+              border: 'none',
+              color: 'white',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4px'
+            }}
+          >
+            <span style={{
+              display: 'inline-block',
+              width: '12px',
+              height: '12px',
+              position: 'relative'
+            }}>
+              {copyStatus === 'copied' ? (
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20,6 9,17 4,12"></polyline>
+                </svg>
+              ) : (
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
+                </svg>
+              )}
+            </span>
+            {copyStatus === 'copied' ? 'Copied!' : 'Copy'}
+          </button>
         </div>
-      )}
-      
-      <div className="mt-4 text-sm text-gray-600 dark:text-gray-400">
-        <p className="font-medium">Expected JSON format:</p>
-        <pre className="mt-2 p-2 bg-gray-100 dark:bg-gray-800 rounded text-xs overflow-x-auto">
-{`[
-  {
-    "date": "2025-09-12",
-    "symbol": "AAPL",
-    "action": "buy",
-    "shares": 10,
-    "amount_usd": -1000.00
-  }
-]`}
-        </pre>
+        <div className="tv-panel-content">
+          <p style={{ fontSize: '14px', color: 'var(--tv-text-primary)', marginBottom: '16px' }}>
+            Use this prompt with your AI tool to process Blink trading screenshots:
+          </p>
+          <pre style={{ 
+            fontSize: '12px', 
+            color: 'var(--tv-text-secondary)',
+            backgroundColor: 'var(--tv-background-secondary)',
+            padding: '16px',
+            borderRadius: '4px',
+            textAlign: 'left',
+            overflow: 'auto',
+            whiteSpace: 'pre-wrap'
+          }}>
+{aiPrompt}
+          </pre>
+          <p style={{ fontSize: '12px', color: 'var(--tv-text-secondary)', margin: '8px 0 0 0' }}>
+            Click the copy button above to copy this prompt and use it with an AI that can process images.
+          </p>
+        </div>
       </div>
     </div>
   );
