@@ -46,22 +46,27 @@ export default function FileUpload({ onDataLoaded }: FileUploadProps) {
         throw new Error('JSON must contain an array of trade records');
       }
 
-      const validatedData: TradeRecord[] = data.map((record: any, index: number) => {
-        if (!record.date || !record.symbol || typeof record.pnl !== 'number') {
-          // throw new Error(`Invalid record at index ${index}. Required: date, symbol, pnl`);
+      const validatedData: TradeRecord[] = data.map((record: unknown) => {
+        const tradeRecord = record as Record<string, unknown>;
+        if (!tradeRecord.date || !tradeRecord.amount_usd) {
+          throw new Error('Invalid record format. Required: date, amount_usd');
+        }
+        
+        // Map action to valid type or default to 'buy'
+        let action: TradeRecord['action'] = 'buy';
+        if (typeof tradeRecord.action === 'string') {
+          const validActions: TradeRecord['action'][] = ['buy', 'sell', 'dividend', 'deposit', 'tax_june', 'tax_july', 'tax_august'];
+          if (validActions.includes(tradeRecord.action as TradeRecord['action'])) {
+            action = tradeRecord.action as TradeRecord['action'];
+          }
         }
         
         return {
-          date: record.date,
-          symbol: record.symbol,
-          pnl: record.pnl,
-          quantity: record.quantity || 0,
-          price: record.price || 0,
-          side: record.side || 'buy',
-          commission: record.commission || 0,
-          action: record.action || '', // Provide a sensible default or map as needed
-          shares: record.shares || 0, // Provide a sensible default or map as needed
-          amount_usd: record.amount_usd || 0 // Provide a sensible default or map as needed
+          date: tradeRecord.date as string,
+          symbol: (tradeRecord.symbol as string) || null,
+          action,
+          shares: (tradeRecord.shares as number) || null,
+          amount_usd: tradeRecord.amount_usd as number
         };
       });
 

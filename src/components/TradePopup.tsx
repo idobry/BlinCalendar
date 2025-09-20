@@ -1,6 +1,6 @@
 'use client';
 
-import { DailyData, CompletedTrade } from '@/lib/types';
+import { DailyData } from '@/lib/types';
 import { formatCurrency, formatPercentage } from '@/lib/tradeProcessor';
 
 interface TradePopupProps {

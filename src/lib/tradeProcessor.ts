@@ -25,7 +25,7 @@ export function processTradeData(rawData: TradeRecord[]): {
   Object.entries(symbolTrades).forEach(([symbol, trades]) => {
     const sortedTrades = trades.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
     
-    let buyQueue: TradeRecord[] = [];
+    const buyQueue: TradeRecord[] = [];
     
     sortedTrades.forEach(trade => {
       if (trade.action === 'buy') {
@@ -97,7 +97,6 @@ export function processTradeData(rawData: TradeRecord[]): {
 }
 
 export function generateCalendarData(dailyData: DailyData[], year: number, month: number): DailyData[] {
-  const firstDay = new Date(year, month, 1);
   const lastDay = new Date(year, month + 1, 0);
   const daysInMonth = lastDay.getDate();
   
